@@ -43,23 +43,62 @@ module.exports = function(Chart) {
 			// lineWidth :
 			generateLabels: function(chart) {
 				var data = chart.data;
-				return helpers.isArray(data.datasets) ? data.datasets.map(function(dataset, i) {
-					return {
-						text: dataset.label,
-						fillStyle: (!helpers.isArray(dataset.backgroundColor) ? dataset.backgroundColor : dataset.backgroundColor[0]),
-						hidden: !chart.isDatasetVisible(i),
-						lineCap: dataset.borderCapStyle,
-						lineDash: dataset.borderDash,
-						lineDashOffset: dataset.borderDashOffset,
-						lineJoin: dataset.borderJoinStyle,
-						lineWidth: dataset.borderWidth,
-						strokeStyle: dataset.borderColor,
-						pointStyle: dataset.pointStyle,
+				if (helpers.isArray(data.datasets) && helpers.isArray(data.labels))  {
+					if ( (data.datasets.length == 1 ) && (data.datasets[0].data.length > 1) && (data.datasets[0].data.length == data.labels.length ) ) {
+						var labels = [];
+						var stop = data.labels.length;
+						var legendText = '';
 
-						// Below is extra data used for toggling the datasets
-						datasetIndex: i
-					};
-				}, this) : [];
+						for (var j=0; j < stop; j++ ) {
+
+							legendText = (data.legends != undefined ) && helpers.isArray(data.legends)
+								? data.legends[j]
+								: (data.legendsRef != undefined ) && helpers.isArray(data.legendsRef)
+									? data.labels[j] + ' - ' + data.legendsRef[j]
+									: data.labels[j];
+
+							labels.push(
+								{
+									text: legendText,
+									fillStyle: (!helpers.isArray(data.datasets[0].backgroundColor) ? data.datasets[0].backgroundColor : data.datasets[0].backgroundColor[j]),
+									hidden: !chart.isDatasetVisible(0),
+									lineCap: data.datasets[0].borderCapStyle,
+									lineDash: data.datasets[0].borderDash,
+									lineDashOffset: data.datasets[0].borderDashOffset,
+									lineJoin: data.datasets[0].borderJoinStyle,
+									lineWidth: data.datasets[0].borderWidth,
+									strokeStyle: data.datasets[0].borderColor,
+									pointStyle: data.datasets[0].pointStyle,
+
+									// Below is extra data used for toggling the datasets
+									datasetIndex: j+100,
+									index: j
+								}
+							)
+						}
+						return labels;
+					}
+
+				} else {
+
+					return helpers.isArray(data.datasets) ? data.datasets.map(function (dataset, i) {
+						return {
+							text: dataset.label,
+							fillStyle: (!helpers.isArray(dataset.backgroundColor) ? dataset.backgroundColor : dataset.backgroundColor[0]),
+							hidden: !chart.isDatasetVisible(i),
+							lineCap: dataset.borderCapStyle,
+							lineDash: dataset.borderDash,
+							lineDashOffset: dataset.borderDashOffset,
+							lineJoin: dataset.borderJoinStyle,
+							lineWidth: dataset.borderWidth,
+							strokeStyle: dataset.borderColor,
+							pointStyle: dataset.pointStyle,
+
+							// Below is extra data used for toggling the datasets
+							datasetIndex: i
+						};
+					}, this) : [];
+				}
 			}
 		}
 	};

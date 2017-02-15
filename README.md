@@ -49,6 +49,21 @@ More information on building and testing can be found in [gulpfile.js](gulpfile.
 
 Thanks to [BrowserStack](https://browserstack.com) for allowing our team to test on thousands of browsers.
 
+
+## This Fork
+
+This fork is intended to supply an easy way to add legends on simple bar charts. 
+Please, see the samples/bar/bar-legends-reference.html to see an example. 
+
+The main features are:
+* Simple Legends
+* The ability to reference Legends on long labels 
+
+##### Warnning:
+Not all charts are affected by these features. This fork is a draft work.
+
+
+
 ## License
 
 Chart.js is available under the [MIT license](http://opensource.org/licenses/MIT).

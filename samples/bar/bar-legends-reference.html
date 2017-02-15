@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Combo Bar-Line Chart</title>
+    <!--<script src="../../momentjs/moment.min.js"></script>-->
+    <script src="../../dist/Chart.bundle.js"></script>
+    <script src="../utils.js"></script>
+    <style>
+        canvas {
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            -ms-user-select: none;
+        }
+
+        #container {
+            width: 75%;
+        }
+
+    </style>
+</head>
+<body>
+    <!--<div id="kpi">-->
+        <div id="container">
+            <canvas id="canvas"></canvas>
+        </div>
+        <!--<div id="top10Legend" class="pieLegend"></div>-->
+    <!--</div>-->
+    <button id="randomizeData">Randomize Data</button>
+    <script>
+
+		var aDatasets =[{
+		label: "My First dataset",
+		backgroundColor: [
+			window.chartColors.red,
+			window.chartColors.orange,
+			window.chartColors.yellow,
+			window.chartColors.green,
+			window.chartColors.blue,
+			window.chartColors.purple,
+			window.chartColors.red
+		],
+		borderWidth: 1,
+		data: [65, 59, 80, 81, 0, 55, 40]
+	}];
+
+
+        var chartData = {
+            labels: ["A1", "A2", "A3", "A4", "A5", "A6", "A7"],
+//            legends: ["B1 - January", "B2 - February", "B3 - March", "B4 - April", "B5-May", "B6-June", "B7-July"],
+            legendsRef: ["January", "February", "March", "April", "May", "June", "July"],
+//            labels: [''],
+            datasets: aDatasets
+        };
+
+		var myChart;
+        window.onload = function() {
+            var ctx = document.getElementById("canvas").getContext("2d");
+			myChart = new Chart(ctx, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                	legend: {display:true, position: 'bottom'},
+//                    responsive: true,
+//					legend: { display: false, labels: { fontColor: "blue", fontSize: 18}},
+                    scales: {
+                    	yAxes: [{
+                    		stacked: false,
+                            ticks: {
+                    			beginAtZero: true,
+                                min: 0,
+                                max: 100
+                            }
+                        }]
+                    },
+					title: {
+                        display: true,
+                        text: 'Chart.js Bar Chart'
+                    },
+                    tooltips: {
+                        mode: 'index',
+                        intersect: true
+                    }
+                }
+            });
+			//document.getElementById("top10Legend").innerHTML = myChart.generateLegend();
+        };
+
+        document.getElementById('randomizeData').addEventListener('click', function() {
+            chartData.datasets.forEach(function(dataset) {
+                dataset.data = dataset.data.map(function() {
+                    return randomScalingFactor();
+                });
+            });
+			myChart.update();
+        });
+    </script>
+</body>
+
+</html>
