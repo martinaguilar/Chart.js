@@ -50,7 +50,7 @@ More information on building and testing can be found in [gulpfile.js](gulpfile.
 Thanks to [BrowserStack](https://browserstack.com) for allowing our team to test on thousands of browsers.
 
 
-## This Fork
+## About This Fork
 
 This fork is intended to supply an easy way to add legends on simple bar charts. 
 Please, see the samples/bar/bar-legends-reference.html to see an example. 

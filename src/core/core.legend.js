@@ -43,8 +43,11 @@ module.exports = function(Chart) {
 			// lineWidth :
 			generateLabels: function(chart) {
 				var data = chart.data;
+				var bSimpleLegends = false;
+
 				if (helpers.isArray(data.datasets) && helpers.isArray(data.labels))  {
 					if ( (data.datasets.length == 1 ) && (data.datasets[0].data.length > 1) && (data.datasets[0].data.length == data.labels.length ) ) {
+						bSimpleLegends = true;
 						var labels = [];
 						var stop = data.labels.length;
 						var legendText = '';
@@ -79,7 +82,8 @@ module.exports = function(Chart) {
 						return labels;
 					}
 
-				} else {
+				}
+				if ( !bSimpleLegends ) {
 
 					return helpers.isArray(data.datasets) ? data.datasets.map(function (dataset, i) {
 						return {
