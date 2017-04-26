@@ -8,17 +8,16 @@
 
 ## Installation
 
-You can download the latest version of Chart.js from the [GitHub releases](https://github.com/chartjs/Chart.js/releases/latest) or use a [Chart.js CDN](https://cdnjs.com/libraries/Chart.js).
+Build and add the files to your code from dist folder.
 
-To install via npm:
-
-```bash
-npm install chart.js --save
+```html
+<script src="dist/Chart.min.js"></script> 
 ```
 
-To install via bower:
-```bash
-bower install chart.js --save
+OR with moment.js
+
+```html
+<script src="dist/Chart.bundle.min.js"></script> 
 ```
 
 #### Selecting the Correct Build
