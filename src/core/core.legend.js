@@ -46,7 +46,8 @@ module.exports = function(Chart) {
 				var bSimpleLegends = false;
 
 				if (helpers.isArray(data.datasets) && helpers.isArray(data.labels))  {
-					if ( (data.datasets.length == 1 ) && (data.datasets[0].data.length > 0) && (data.datasets[0].data.length == data.labels.length ) ) {
+					if ( (data.datasets.length == 1 ) && (data.datasets[0].data.length > 0) && (data.datasets[0].data.length == data.labels.length ) &&
+						( (data.datasets[0].label == null) || (data.datasets[0].label == undefined) || (data.datasets[0].label == '' ) ) ) {
 						bSimpleLegends = true;
 						var labels = [];
 						var stop = data.labels.length;
